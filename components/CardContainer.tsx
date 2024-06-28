@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, FlatList, ActivityIndicator, RefreshControl, TextInput } from 'react-native';
 import { allImage, searchQuery } from '@/utils/FetchFromAPI';
 import Card from './Card';
-import { Item } from '@/app/(tabs)';
 import { useRouter } from 'expo-router';
+import { Item } from '@/app/(tabs)/(bottom)';
 
 interface ActionObject {
     [key: string]: (params: { page: number, query?: string }) => Promise<any>;
@@ -57,10 +57,6 @@ const CardContainer = ({ Action, Query }: { Query?: string; Action: ActionsOptio
         });
     };
 
-    const handleSearch = (text: string) => {
-        setQuery(text);
-    };
-
     useEffect(() => {
         fetchRecentPhotos(page);
     }, []);
@@ -75,12 +71,6 @@ const CardContainer = ({ Action, Query }: { Query?: string; Action: ActionsOptio
 
     return (
         <View style={styles.container}>
-            <TextInput
-                style={styles.input}
-                placeholder="Search"
-                onChangeText={handleSearch}
-                onSubmitEditing={() => router.push(`/search/${query}`)}
-            />
             {error ? <Text>{error}</Text> : null}
             <FlatList
                 data={photos}

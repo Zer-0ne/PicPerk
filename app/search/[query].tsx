@@ -10,7 +10,7 @@ export default function Search() {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerTitle: query,
-      // headerShown: false,
+      headerShown: true,
     });
   }, [navigation]);
 
